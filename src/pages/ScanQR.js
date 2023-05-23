@@ -1,24 +1,63 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Linking,
+  ScrollView,
+} from 'react-native';
+import React, {useState} from 'react';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import Ztechub from '../components/Ztechub';
+import TopNav from '../components/TopNav';
 
 const ScanQR = ({navigation}) => {
-  const handleBack = () => {
-    navigation.navigate('Home', {name: 'Home'});
+  const [qrData, setQrData] = useState('The decoded data will be shown here:');
+  const [reload, setReload] = useState(false);
+  const [shareData, setShareData] = useState('');
+
+  const onScan = e => {
+    setQrData(e.data);
+    setReload(true);
+    setShareData(e.data);
+    Linking.openURL(e.data).catch(error => console.log('Error >>> ', error));
   };
+
+  const handleReload = () => {
+    setQrData('Scan Again');
+    setReload(false);
+  };
+
   return (
     <View style={styles.container}>
-      <View>
-        <View style={styles.topNav}>
-          <TouchableOpacity onPress={handleBack}>
-            <Image
-              source={require('../icons/back_icon.png')}
-              style={styles.back_icon}
-            />
-          </TouchableOpacity>
-        </View>
+      <TopNav navigation={navigation} shareData={shareData} />
 
-        <Text>Result: </Text>
+      <Text style={styles.QRData}>QR Data: </Text>
+      <ScrollView style={styles.data_container}>
+        <Text style={styles.Data}>{qrData}</Text>
+      </ScrollView>
+
+      <View style={styles.QR_Container}>
+        {reload ? (
+          <>
+            <TouchableOpacity onPress={handleReload}>
+              <Image source={require('../icons/reload.png')} />
+            </TouchableOpacity>
+          </>
+        ) : (
+          <QRCodeScanner
+            onRead={onScan}
+            cameraStyle={[styles.camera]}
+            containerStyle={[styles.cameraContainer]}
+            showMarker={true}
+            markerStyle={styles.marker}
+            reactivate={reload ? false : true}
+          />
+        )}
       </View>
+
+      <Ztechub />
     </View>
   );
 };
@@ -31,18 +70,47 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F6F6',
   },
 
-  topNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#23B1A4',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    marginBottom: 10,
+  data_container: {
+    maxHeight: 120,
   },
 
-  back_icon: {
-    height: 15,
-    width: 15,
+  QRData: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+
+  Data: {
+    fontSize: 16,
+    fontWeight: '600',
+    paddingHorizontal: 20,
+    marginVertical: 5,
+    color: 'black',
+  },
+
+  QR_Container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    marginBottom: 80,
+  },
+
+  cameraContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  camera: {
+    // height: 327,
+    width: '100%',
+  },
+
+  marker: {
+    borderColor: '#23B1A4',
+    borderWidth: 3,
+    // height: '100%',
+    // width: 270,
   },
 });

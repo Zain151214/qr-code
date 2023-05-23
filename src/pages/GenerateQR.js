@@ -6,35 +6,24 @@ import {
   View,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import Ztechub from '../components/Ztechub';
+import TopNav from '../components/TopNav';
 
 const GenerateQR = ({navigation}) => {
-  const handleBack = () => {
-    navigation.navigate('Home', {name: 'Home'});
-  };
+  const [shareData, setShareDate] = useState('Generate Share Data');
+
   return (
     <View style={styles.container}>
-      <View style={styles.topNav}>
-        <TouchableOpacity onPress={handleBack}>
-          <Image
-            source={require('../icons/back_icon.png')}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            source={require('../icons/share_icon.png')}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-      </View>
-      <View>
+      <TopNav navigation={navigation} shareData={shareData} />
+
+      <View style={{flex: 1}}>
         <Text>Generate For:</Text>
         <TextInput placeholder="Enter details" style={styles.input} />
-      </View>
-      <View>
         <Text>Show QR Code Image Here</Text>
       </View>
+
+      <Ztechub />
     </View>
   );
 };
@@ -45,21 +34,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F3F6F6',
-  },
-
-  topNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#23B1A4',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    marginBottom: 10,
-  },
-
-  icon: {
-    height: 20,
-    width: 18,
   },
 
   input: {
