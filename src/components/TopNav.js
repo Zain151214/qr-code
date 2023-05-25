@@ -7,6 +7,10 @@ import {
   Alert,
 } from 'react-native';
 import React from 'react';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const TopNav = ({navigation, shareData, download}) => {
   const handleBack = () => {
@@ -61,9 +65,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#23B1A4',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    marginBottom: 10,
+    paddingVertical: hp(2),
+    paddingHorizontal: wp(6),
+    marginBottom: hp(1),
   },
 
   download_icon_container: {
@@ -71,13 +75,13 @@ const styles = StyleSheet.create({
   },
 
   download_icon: {
-    marginRight: 30,
-    height: 25,
-    width: 21,
+    marginRight: wp(7),
+    height: hp(3),
+    width: wp(5),
   },
 
   icon: {
-    height: 25,
-    width: 21,
+    height: hp(3),
+    width: wp(5.5),
   },
 });

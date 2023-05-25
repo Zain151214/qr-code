@@ -3,6 +3,10 @@ import React, {useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
 import QRCodeStyled from 'react-native-qrcode-styled';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const GenerateQR = ({navigation}) => {
   const [text, setText] = useState('');
@@ -11,7 +15,7 @@ const GenerateQR = ({navigation}) => {
     <View style={styles.container}>
       <TopNav navigation={navigation} download={true} />
 
-      <View style={{flex: 1, padding: 20}}>
+      <View style={styles.content_container}>
         <Text style={styles.mainHeading}>Generate QR For:</Text>
         <TextInput
           placeholder="Enter Details"
@@ -19,7 +23,7 @@ const GenerateQR = ({navigation}) => {
           onChangeText={data => setText(data)}
           style={styles.input}
           multiline
-          numberOfLines={5}
+          numberOfLines={4}
         />
         <View style={styles.clear_container}>
           <Pressable onPress={() => setText('')}>
@@ -28,7 +32,7 @@ const GenerateQR = ({navigation}) => {
         </View>
 
         <View style={styles.QR_container}>
-          {text && <QRCodeStyled data={text} padding={20} pieceSize={12} />}
+          {text && <QRCodeStyled data={text} padding={20} pieceSize={10} />}
         </View>
       </View>
       <Ztechub />
@@ -44,17 +48,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F6F6',
   },
 
+  content_container: {
+    flex: 1,
+    paddingVertical: hp(3),
+    paddingHorizontal: wp(6),
+  },
+
   mainHeading: {
-    fontSize: 18,
+    fontSize: wp(5),
     fontWeight: 'bold',
     color: 'black',
   },
 
   input: {
     borderWidth: 1,
-    marginTop: 20,
-    marginBottom: 15,
-    fontSize: 16,
+    marginTop: hp(2.5),
+    marginBottom: hp(1.5),
+    fontSize: wp(4),
     color: 'black',
     textAlignVertical: 'top',
   },
@@ -66,8 +76,8 @@ const styles = StyleSheet.create({
 
   clear_button: {
     color: 'black',
-    marginBottom: 20,
-    fontSize: 16,
+    marginBottom: hp(3),
+    fontSize: wp(4),
     fontWeight: '500',
   },
 

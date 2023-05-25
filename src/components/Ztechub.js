@@ -1,5 +1,9 @@
 import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Ztechub = () => {
   const handleZtechub = () => {
@@ -19,9 +23,9 @@ export default Ztechub;
 const styles = StyleSheet.create({
   ztechub: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: wp(5),
     fontWeight: 'bold',
     color: 'black',
-    marginBottom: 30,
+    marginBottom: hp(4),
   },
 });

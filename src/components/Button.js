@@ -1,5 +1,9 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Button = ({title, onPress}) => {
   return (
@@ -17,12 +21,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    width: 150,
-    height: 50,
+    width: wp(40),
+    height: hp(6.5),
   },
 
   title: {
-    fontSize: 18,
+    fontSize: wp(5),
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',

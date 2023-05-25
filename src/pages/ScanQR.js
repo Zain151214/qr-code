@@ -11,6 +11,10 @@ import React, {useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const ScanQR = ({navigation}) => {
   const [qrData, setQrData] = useState('The decoded data will be shown here:');
@@ -71,22 +75,22 @@ const styles = StyleSheet.create({
   },
 
   data_container: {
-    maxHeight: 120,
+    maxHeight: hp(13),
   },
 
   QRData: {
-    fontSize: 18,
+    fontSize: wp(5),
     fontWeight: 'bold',
     color: 'black',
-    paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingHorizontal: wp(6),
+    paddingTop: hp(3),
   },
 
   Data: {
-    fontSize: 16,
+    fontSize: wp(4),
     fontWeight: '600',
-    paddingHorizontal: 20,
-    marginVertical: 5,
+    paddingHorizontal: wp(6),
+    marginVertical: hp(1.5),
     color: 'black',
   },
 
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    marginBottom: 80,
+    marginBottom: hp(9),
   },
 
   cameraContainer: {
@@ -104,13 +108,13 @@ const styles = StyleSheet.create({
 
   camera: {
     // height: 327,
-    width: '100%',
+    width: wp(50),
   },
 
   marker: {
     borderColor: '#23B1A4',
     borderWidth: 3,
-    // height: '100%',
+    height: hp(43),
     // width: 270,
   },
 });
