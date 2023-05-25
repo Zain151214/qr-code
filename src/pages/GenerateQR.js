@@ -2,7 +2,7 @@ import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
-import QRCode from 'react-native-qrcode-svg';
+import QRCodeStyled from 'react-native-qrcode-styled';
 
 const GenerateQR = ({navigation}) => {
   const [shareData, setShareDate] = useState('Generate Share Data');
@@ -29,7 +29,14 @@ const GenerateQR = ({navigation}) => {
         </View>
 
         <View style={styles.QR_container}>
-          {text && <QRCode value={text} size={200} />}
+          {text && (
+            <QRCodeStyled
+              data={text}
+              // style={{backgroundColor: 'white'}}
+              padding={20}
+              pieceSize={8}
+            />
+          )}
         </View>
       </View>
       <Ztechub />
