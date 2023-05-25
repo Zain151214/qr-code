@@ -17,12 +17,11 @@ const Ztechub = () => {
 export default Ztechub;
 
 const styles = StyleSheet.create({
-  container: {},
   ztechub: {
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    marginBottom: 20,
+    marginBottom: 30,
   },
 });

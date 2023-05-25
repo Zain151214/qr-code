@@ -31,7 +31,7 @@ const ScanQR = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <TopNav navigation={navigation} shareData={shareData} />
+      <TopNav navigation={navigation} shareData={shareData} download={false} />
 
       <Text style={styles.QRData}>QR Data: </Text>
       <ScrollView style={styles.data_container}>

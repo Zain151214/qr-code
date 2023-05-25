@@ -5,12 +5,11 @@ import TopNav from '../components/TopNav';
 import QRCodeStyled from 'react-native-qrcode-styled';
 
 const GenerateQR = ({navigation}) => {
-  const [shareData, setShareDate] = useState('Generate Share Data');
   const [text, setText] = useState('');
 
   return (
     <View style={styles.container}>
-      <TopNav navigation={navigation} shareData={shareData} />
+      <TopNav navigation={navigation} download={true} />
 
       <View style={{flex: 1, padding: 20}}>
         <Text style={styles.mainHeading}>Generate QR For:</Text>
@@ -29,14 +28,7 @@ const GenerateQR = ({navigation}) => {
         </View>
 
         <View style={styles.QR_container}>
-          {text && (
-            <QRCodeStyled
-              data={text}
-              // style={{backgroundColor: 'white'}}
-              padding={20}
-              pieceSize={8}
-            />
-          )}
+          {text && <QRCodeStyled data={text} padding={20} pieceSize={12} />}
         </View>
       </View>
       <Ztechub />
@@ -60,7 +52,8 @@ const styles = StyleSheet.create({
 
   input: {
     borderWidth: 1,
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 15,
     fontSize: 16,
     color: 'black',
     textAlignVertical: 'top',
@@ -75,6 +68,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 20,
     fontSize: 16,
+    fontWeight: '500',
   },
 
   QR_container: {
