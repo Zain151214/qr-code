@@ -19,12 +19,9 @@ const Home = ({navigation}) => {
         PermissionsAndroid.PERMISSIONS.CAMERA,
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        Alert.alert('Camera permission granted successfully');
+        console.log('Camera permission granted successfully');
       } else {
-        Alert.alert(
-          'Camera permission denied',
-          'Please give camera permission to use this app. Thank You',
-        );
+        console.log('Camera Permission Denied');
       }
     } catch (error) {
       Alert.alert('Error requesting camera permission:', error);

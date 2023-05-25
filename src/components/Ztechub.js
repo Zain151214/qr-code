@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {},
   ztechub: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
     marginBottom: 20,
