@@ -11,12 +11,12 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {DownloadQr} from './DownloadQR';
 
-const TopNav = ({navigation, shareData, download}) => {
+const TopNav = ({navigation, shareData, download, svgRef}) => {
   const handleBack = () => {
     navigation.navigate('Home', {name: 'Home'});
   };
-
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -28,7 +28,9 @@ const TopNav = ({navigation, shareData, download}) => {
     }
   };
 
-  const handleDownload = () => {};
+  const handleDownload = async () => {
+    await DownloadQr(svgRef);
+  };
 
   return (
     <View style={styles.topNav}>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    height: hp(3),
+    height: hp(3.2),
     width: wp(5.5),
   },
 });

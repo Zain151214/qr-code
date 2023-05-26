@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
 import QRCodeStyled from 'react-native-qrcode-styled';
@@ -10,10 +10,11 @@ import {
 
 const GenerateQR = ({navigation}) => {
   const [text, setText] = useState('');
+  const svgRef = useRef(null);
 
   return (
     <View style={styles.container}>
-      <TopNav navigation={navigation} download={true} />
+      <TopNav navigation={navigation} download={true} svgRef={svgRef} />
 
       <View style={styles.content_container}>
         <Text style={styles.mainHeading}>Generate QR For:</Text>
@@ -32,7 +33,14 @@ const GenerateQR = ({navigation}) => {
         </View>
 
         <View style={styles.QR_container}>
-          {text && <QRCodeStyled data={text} padding={20} pieceSize={10} />}
+          {text && (
+            <QRCodeStyled
+              ref={svgRef}
+              data={text}
+              padding={20}
+              pieceSize={10}
+            />
+          )}
         </View>
       </View>
       <Ztechub />
