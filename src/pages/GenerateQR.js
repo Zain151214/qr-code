@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
 import QRCodeStyled from 'react-native-qrcode-styled';
@@ -39,6 +39,7 @@ const GenerateQR = ({navigation}) => {
               data={text}
               padding={20}
               pieceSize={10}
+              backgroundColor={'white'}
             />
           )}
         </View>
