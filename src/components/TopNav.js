@@ -5,6 +5,7 @@ import {
   Image,
   Share,
   Alert,
+  Text,
 } from 'react-native';
 import React from 'react';
 import {
@@ -12,11 +13,13 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {DownloadQr} from './DownloadQR';
+import {ShareQr} from './ShareQR';
 
 const TopNav = ({navigation, shareData, download, svgRef}) => {
   const handleBack = () => {
     navigation.navigate('Home', {name: 'Home'});
   };
+
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -30,6 +33,11 @@ const TopNav = ({navigation, shareData, download, svgRef}) => {
 
   const handleDownload = async () => {
     await DownloadQr(svgRef);
+  };
+
+  const handleShare = async () => {
+    console.log('svgRef inside handleShare ', svgRef);
+    await ShareQr(svgRef);
   };
 
   return (
@@ -54,6 +62,12 @@ const TopNav = ({navigation, shareData, download, svgRef}) => {
             style={styles.icon}
           />
         </TouchableOpacity>
+
+        {/* {text && ( */}
+        <TouchableOpacity onPress={handleShare}>
+          <Text>Share QR</Text>
+        </TouchableOpacity>
+        {/* )} */}
       </View>
     </View>
   );

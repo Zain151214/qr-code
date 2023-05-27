@@ -1,4 +1,11 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
@@ -12,9 +19,16 @@ const GenerateQR = ({navigation}) => {
   const [text, setText] = useState('');
   const svgRef = useRef(null);
 
+  // console.log('svgref inside g >>> ', svgRef);
+
   return (
     <View style={styles.container}>
-      <TopNav navigation={navigation} download={true} svgRef={svgRef} />
+      <TopNav
+        navigation={navigation}
+        download={true}
+        svgRef={svgRef}
+        text={text}
+      />
 
       <View style={styles.content_container}>
         <Text style={styles.mainHeading}>Generate QR For:</Text>
