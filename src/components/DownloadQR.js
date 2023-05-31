@@ -7,6 +7,7 @@ const DownloadQr = async svgRef => {
   if (Platform.OS === 'android' && !(await hasCameraRollPermission())) {
     return;
   }
+
   svgRef.current.toDataURL(data => {
     RNFS.writeFile(
       RNFS.DownloadDirectoryPath +
@@ -23,8 +24,9 @@ const DownloadQr = async svgRef => {
       })
       .catch(e => {
         console.log('e', e);
-        Alert.alert('Error', e);
+        Alert.alert('error ', e.message);
       });
   });
 };
+
 export {DownloadQr};

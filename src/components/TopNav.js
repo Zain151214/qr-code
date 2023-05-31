@@ -5,7 +5,6 @@ import {
   Image,
   Share,
   Alert,
-  Text,
 } from 'react-native';
 import React from 'react';
 import {
@@ -14,8 +13,9 @@ import {
 } from 'react-native-responsive-screen';
 import {DownloadQr} from './DownloadQR';
 import {ShareQr} from './ShareQR';
+import Clipboard from '@react-native-clipboard/clipboard';
 
-const TopNav = ({navigation, shareData, download, svgRef}) => {
+const TopNav = ({navigation, shareData, svgRef, text}) => {
   const handleBack = () => {
     navigation.navigate('Home', {name: 'Home'});
   };
@@ -35,9 +35,14 @@ const TopNav = ({navigation, shareData, download, svgRef}) => {
     await DownloadQr(svgRef);
   };
 
-  const handleShare = async () => {
-    console.log('svgRef inside handleShare ', svgRef);
-    await ShareQr(svgRef);
+  const ShareQRCode = async () => {
+    await ShareQr(svgRef, text);
+  };
+
+  const copyToClipboard = text => {
+    Clipboard.setString(text);
+    console.log('copied data >>> ', text);
+    Alert.alert('Copied to clipboard');
   };
 
   return (
@@ -47,7 +52,7 @@ const TopNav = ({navigation, shareData, download, svgRef}) => {
       </TouchableOpacity>
 
       <View style={styles.download_icon_container}>
-        {download && (
+        {text && (
           <TouchableOpacity onPress={handleDownload}>
             <Image
               source={require('../icons/download_icon.png')}
@@ -56,18 +61,35 @@ const TopNav = ({navigation, shareData, download, svgRef}) => {
           </TouchableOpacity>
         )}
 
-        <TouchableOpacity onPress={onShare}>
+        {shareData && (
+          <TouchableOpacity onPress={() => copyToClipboard(shareData)}>
+            <Image
+              source={require('../icons/copy_icon.png')}
+              style={styles.copy_icon}
+            />
+          </TouchableOpacity>
+        )}
+
+        {shareData?.length > 0 ? (
+          <TouchableOpacity onPress={onShare}>
+            <Image
+              source={require('../icons/share_icon.png')}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        ) : text?.length > 0 ? (
+          <TouchableOpacity onPress={ShareQRCode}>
+            <Image
+              source={require('../icons/share_icon.png')}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        ) : (
           <Image
             source={require('../icons/share_icon.png')}
             style={styles.icon}
           />
-        </TouchableOpacity>
-
-        {/* {text && ( */}
-        <TouchableOpacity onPress={handleShare}>
-          <Text>Share QR</Text>
-        </TouchableOpacity>
-        {/* )} */}
+        )}
       </View>
     </View>
   );
@@ -98,6 +120,12 @@ const styles = StyleSheet.create({
 
   icon: {
     height: hp(3.2),
-    width: wp(5.5),
+    width: wp(6),
+  },
+
+  copy_icon: {
+    height: hp(3.2),
+    width: wp(6.5),
+    marginRight: wp(6),
   },
 });

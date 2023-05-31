@@ -1,26 +1,25 @@
 import React from 'react';
 import {Alert} from 'react-native';
 import Share from 'react-native-share';
+import {hasCameraRollPermission} from '../utils/Permissions';
 
-const ShareQr = async ({svgRef}) => {
-  console.log('svg >>> ', svgRef);
+const ShareQr = async (svgRef, text) => {
+  if (Platform.OS === 'android' && !(await hasCameraRollPermission())) {
+    return;
+  }
 
-  svgRef(data => {
-    console.log('data >>> ', data);
+  svgRef.current.toDataURL(data => {
     const shareImageBase64 = {
       title: 'QR',
-      //   message: text,
+      message: text,
       url: `data:image/png;base64,${data}`,
     };
-    console.log('share base image >>> ', shareImageBase64);
     Share.open(shareImageBase64)
       .then(() => {
         Alert.alert('QR Code Share Successfully');
-        console.log('svg then >>> ', svgRef);
       })
       .catch(error => {
-        Alert.alert('QR Code Share Error >>> ', error);
-        console.log('svg >>> catch ', svgRef);
+        console.log('error', error.message);
       });
   });
 };

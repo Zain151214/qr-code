@@ -1,15 +1,8 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
-import QRCodeStyled from 'react-native-qrcode-styled';
+import QRCode from 'react-native-qrcode-svg';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,23 +12,19 @@ const GenerateQR = ({navigation}) => {
   const [text, setText] = useState('');
   const svgRef = useRef(null);
 
-  // console.log('svgref inside g >>> ', svgRef);
-
   return (
     <View style={styles.container}>
-      <TopNav
-        navigation={navigation}
-        download={true}
-        svgRef={svgRef}
-        text={text}
-      />
+      <TopNav navigation={navigation} svgRef={svgRef} text={text} />
 
       <View style={styles.content_container}>
         <Text style={styles.mainHeading}>Generate QR For:</Text>
         <TextInput
           placeholder="Enter Details"
           value={text}
-          onChangeText={data => setText(data)}
+          onChangeText={data => {
+            const correctDate = data.replace(/ +$/gm, ' ').replace(/^ +/gm, '');
+            setText(correctDate);
+          }}
           style={styles.input}
           multiline
           numberOfLines={4}
@@ -48,13 +37,7 @@ const GenerateQR = ({navigation}) => {
 
         <View style={styles.QR_container}>
           {text && (
-            <QRCodeStyled
-              ref={svgRef}
-              data={text}
-              padding={20}
-              pieceSize={10}
-              backgroundColor={'white'}
-            />
+            <QRCode quietZone={25} value={text} getRef={svgRef} size={250} />
           )}
         </View>
       </View>
@@ -99,7 +82,7 @@ const styles = StyleSheet.create({
 
   clear_button: {
     color: 'black',
-    marginBottom: hp(3),
+    marginBottom: hp(6),
     fontSize: wp(4),
     fontWeight: '500',
   },

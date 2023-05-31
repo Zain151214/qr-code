@@ -31,11 +31,12 @@ const ScanQR = ({navigation}) => {
   const handleReload = () => {
     setQrData('Scan Again');
     setReload(false);
+    setShareData('');
   };
 
   return (
     <View style={styles.container}>
-      <TopNav navigation={navigation} shareData={shareData} download={false} />
+      <TopNav navigation={navigation} shareData={shareData} />
 
       <Text style={styles.QRData}>QR Data: </Text>
       <ScrollView style={styles.data_container}>

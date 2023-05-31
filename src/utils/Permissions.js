@@ -14,6 +14,7 @@ const hasCameraRollPermission = async () => {
   const status = await PermissionsAndroid.request(permission);
   return status === 'granted';
 };
+
 const hasFilePermission = async () => {
   const permission =
     Platform.Version >= '33'
