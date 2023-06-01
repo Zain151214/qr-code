@@ -96,7 +96,7 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
         title={
           shareData
             ? 'Copied To Clipboard'
-            : 'We are generating your QR code and it will be ready for you in just a few minutes. '
+            : 'QR Code is downloaded Successfully. Please reload your files or open the downloaded files again to view it properly.'
         }
       />
     </View>

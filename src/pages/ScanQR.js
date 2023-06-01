@@ -19,7 +19,7 @@ import {
 const ScanQR = ({navigation}) => {
   const [qrData, setQrData] = useState('The decoded data will be shown here:');
   const [reload, setReload] = useState(false);
-  const [shareData, setShareData] = useState('zain');
+  const [shareData, setShareData] = useState('');
 
   const onScan = e => {
     setQrData(e.data);
@@ -47,7 +47,10 @@ const ScanQR = ({navigation}) => {
         {reload ? (
           <>
             <TouchableOpacity onPress={handleReload}>
-              <Image source={require('../icons/reload.png')} />
+              <Image
+                style={styles.reload_icon}
+                source={require('../icons/reload.png')}
+              />
             </TouchableOpacity>
           </>
         ) : (
@@ -117,5 +120,10 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     height: hp(43),
     // width: 270,
+  },
+
+  reload_icon: {
+    height: hp(15),
+    width: wp(31),
   },
 });
