@@ -1,12 +1,5 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Image,
-  Share,
-  Alert,
-} from 'react-native';
-import React from 'react';
+import {StyleSheet, TouchableOpacity, View, Image, Share} from 'react-native';
+import React, {useState} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -14,8 +7,11 @@ import {
 import {DownloadQr} from './DownloadQR';
 import {ShareQr} from './ShareQR';
 import Clipboard from '@react-native-clipboard/clipboard';
+import ShowModal from './Modal';
 
 const TopNav = ({navigation, shareData, svgRef, text}) => {
+  const [showModal, setShowModal] = useState(false);
+
   const handleBack = () => {
     navigation.navigate('Home', {name: 'Home'});
   };
@@ -27,12 +23,13 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
       });
       return result;
     } catch (error) {
-      Alert.alert(error.message);
+      // console.log('share error >>> ', error.message);
     }
   };
 
   const handleDownload = async () => {
     await DownloadQr(svgRef);
+    setShowModal(true);
   };
 
   const ShareQRCode = async () => {
@@ -41,8 +38,6 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
 
   const copyToClipboard = text => {
     Clipboard.setString(text);
-    console.log('copied data >>> ', text);
-    Alert.alert('Copied to clipboard');
   };
 
   return (
@@ -62,7 +57,11 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
         )}
 
         {shareData && (
-          <TouchableOpacity onPress={() => copyToClipboard(shareData)}>
+          <TouchableOpacity
+            onPress={() => {
+              copyToClipboard(shareData);
+              setShowModal(true);
+            }}>
             <Image
               source={require('../icons/copy_icon.png')}
               style={styles.copy_icon}
@@ -91,6 +90,15 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
           />
         )}
       </View>
+      <ShowModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        title={
+          shareData
+            ? 'Copied To Clipboard'
+            : 'We are generating your QR code and it will be ready for you in just a few minutes. '
+        }
+      />
     </View>
   );
 };

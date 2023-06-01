@@ -19,7 +19,7 @@ import {
 const ScanQR = ({navigation}) => {
   const [qrData, setQrData] = useState('The decoded data will be shown here:');
   const [reload, setReload] = useState(false);
-  const [shareData, setShareData] = useState('');
+  const [shareData, setShareData] = useState('zain');
 
   const onScan = e => {
     setQrData(e.data);

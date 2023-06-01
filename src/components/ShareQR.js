@@ -1,5 +1,4 @@
 import React from 'react';
-import {Alert} from 'react-native';
 import Share from 'react-native-share';
 import {hasCameraRollPermission} from '../utils/Permissions';
 
@@ -16,10 +15,10 @@ const ShareQr = async (svgRef, text) => {
     };
     Share.open(shareImageBase64)
       .then(() => {
-        Alert.alert('QR Code Share Successfully');
+        // console.log('Shared Successfully');
       })
       .catch(error => {
-        console.log('error', error.message);
+        // console.log('error', error.message);
       });
   });
 };

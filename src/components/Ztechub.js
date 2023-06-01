@@ -9,6 +9,7 @@ const Ztechub = () => {
   const handleZtechub = () => {
     Linking.openURL('https://www.ztechub.com');
   };
+
   return (
     <View>
       <TouchableOpacity onPress={handleZtechub}>

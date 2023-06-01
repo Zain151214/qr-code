@@ -1,10 +1,7 @@
 import React from 'react';
-import {Alert, Platform} from 'react-native';
+import {Platform} from 'react-native';
 import RNFS from 'react-native-fs';
-import {
-  hasCameraRollPermission,
-  hasFilePermission,
-} from './../utils/Permissions';
+import {hasFilePermission} from './../utils/Permissions';
 
 const DownloadQr = async svgRef => {
   if (Platform.OS === 'android' && !(await hasFilePermission())) {
@@ -22,12 +19,10 @@ const DownloadQr = async svgRef => {
       'base64',
     )
       .then(success => {
-        Alert.alert('Image Downloaded Successfully');
-        console.log({success});
+        // console.log({success});
       })
       .catch(e => {
-        console.log('e', e);
-        Alert.alert('error ', e.message);
+        // console.log('e', e);
       });
   });
 };

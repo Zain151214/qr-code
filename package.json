@@ -19,6 +19,7 @@
     "react-native": "0.71.8",
     "react-native-camera": "^4.2.1",
     "react-native-fs": "^2.20.0",
+    "react-native-modal": "^13.0.1",
     "react-native-permissions": "^3.8.0",
     "react-native-qrcode-scanner": "^1.5.5",
     "react-native-qrcode-svg": "^6.2.0",

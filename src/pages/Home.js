@@ -1,4 +1,4 @@
-import {StyleSheet, View, Image, Alert} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import React from 'react';
 import Button from '../components/Button';
 import {PermissionsAndroid} from 'react-native';
@@ -23,12 +23,12 @@ const Home = ({navigation}) => {
         PermissionsAndroid.PERMISSIONS.CAMERA,
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('Camera permission granted successfully');
+        // console.log('Camera permission granted successfully');
       } else {
-        console.log('Camera Permission Denied');
+        // console.log('Camera Permission Denied');
       }
     } catch (error) {
-      Alert.alert('Error requesting camera permission:', error);
+      // console.log('Error requesting camera permission:', error);
     }
   };
 
@@ -36,8 +36,8 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logo}>
-        <Image source={require('../icons/Quick_QR.png')} />
+      <View style={styles.logo_container}>
+        <Image style={styles.logo} source={require('../icons/Quick_QR.png')} />
       </View>
 
       <View style={styles.button_container}>
@@ -59,10 +59,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  logo: {
+  logo_container: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: hp(4),
+  },
+
+  logo: {
+    height: 120,
+    width: 120,
   },
 
   button_container: {
