@@ -18,6 +18,8 @@ const hasCameraRollPermission = async () => {
 const hasFilePermission = async () => {
   const permission =
     Platform.Version >= '33'
+      ? PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
+      : Platform.Version <= '29'
       ? PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
       : PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
 
@@ -25,7 +27,6 @@ const hasFilePermission = async () => {
   if (hasPermission) {
     return true;
   }
-
   const status = await PermissionsAndroid.request(permission);
   return status === 'granted';
 };

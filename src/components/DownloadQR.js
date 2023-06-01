@@ -1,10 +1,13 @@
 import React from 'react';
 import {Alert, Platform} from 'react-native';
 import RNFS from 'react-native-fs';
-import {hasCameraRollPermission} from './../utils/Permissions';
+import {
+  hasCameraRollPermission,
+  hasFilePermission,
+} from './../utils/Permissions';
 
 const DownloadQr = async svgRef => {
-  if (Platform.OS === 'android' && !(await hasCameraRollPermission())) {
+  if (Platform.OS === 'android' && !(await hasFilePermission())) {
     return;
   }
 
