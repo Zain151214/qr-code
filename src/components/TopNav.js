@@ -84,10 +84,7 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
             />
           </TouchableOpacity>
         ) : (
-          <Image
-            source={require('../icons/share_icon.png')}
-            style={styles.icon}
-          />
+          ''
         )}
       </View>
       <ShowModal
@@ -95,8 +92,8 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
         setShowModal={setShowModal}
         title={
           shareData
-            ? 'Copied To Clipboard'
-            : 'QR Code is downloaded Successfully. Please reload your files or open the downloaded files again to view it properly.'
+            ? 'Copied To Clipboard.'
+            : 'QR Code will be downloaded shortly.'
         }
       />
     </View>

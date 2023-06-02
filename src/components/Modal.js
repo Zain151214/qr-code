@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
 
   modal: {
-    height: hp(25),
+    height: hp(17),
     width: wp(80),
     backgroundColor: 'white',
     borderRadius: 10,
