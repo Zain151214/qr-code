@@ -32,19 +32,18 @@ const styles = StyleSheet.create({
   },
 
   modal: {
-    height: hp(22),
+    height: hp(25),
     width: wp(80),
     backgroundColor: 'white',
     borderRadius: 10,
-    padding: 10,
+    padding: 15,
+    justifyContent: 'space-between',
   },
 
   title: {
     fontSize: wp(5),
     color: 'black',
     textAlign: 'center',
-    textAlignVertical: 'center',
-    height: hp(13),
   },
 
   button_container: {
@@ -56,7 +55,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#23B1A4',
     borderRadius: 5,
     width: wp(20),
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    textAlignVertical: 'center',
   },
 
   button_close: {
