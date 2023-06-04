@@ -11,6 +11,7 @@ import ShowModal from './Modal';
 
 const TopNav = ({navigation, shareData, svgRef, text}) => {
   const [showModal, setShowModal] = useState(false);
+  const [showTick, setShowTick] = useState(false);
 
   const handleBack = () => {
     navigation.navigate('Home', {name: 'Home'});
@@ -61,11 +62,22 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
             onPress={() => {
               copyToClipboard(shareData);
               setShowModal(true);
+              setShowTick(true);
+              setTimeout(() => {
+                setShowTick(false);
+              }, 2000);
             }}>
-            <Image
-              source={require('../icons/copy_icon.png')}
-              style={styles.copy_icon}
-            />
+            {showTick ? (
+              <Image
+                source={require('../icons/Done.png')}
+                style={styles.copy_icon}
+              />
+            ) : (
+              <Image
+                source={require('../icons/copy_icon.png')}
+                style={styles.copy_icon}
+              />
+            )}
           </TouchableOpacity>
         )}
 
@@ -87,7 +99,7 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
           ''
         )}
       </View>
-      <ShowModal
+      {/* <ShowModal
         showModal={showModal}
         setShowModal={setShowModal}
         title={
@@ -95,7 +107,7 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
             ? 'Copied To Clipboard.'
             : 'QR Code will be downloaded shortly.'
         }
-      />
+      /> */}
     </View>
   );
 };

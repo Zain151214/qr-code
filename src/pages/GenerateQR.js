@@ -1,4 +1,11 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import Ztechub from '../components/Ztechub';
 import TopNav from '../components/TopNav';
@@ -13,7 +20,7 @@ const GenerateQR = ({navigation}) => {
   const svgRef = useRef(null);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TopNav navigation={navigation} svgRef={svgRef} text={text} />
 
       <View style={styles.content_container}>
@@ -26,9 +33,10 @@ const GenerateQR = ({navigation}) => {
             setText(correctDate);
           }}
           style={styles.input}
-          multiline
+          multiline={true}
           numberOfLines={4}
         />
+
         <View style={styles.clear_container}>
           <Pressable onPress={() => setText('')}>
             <Text style={styles.clear_button}>Clear</Text>
@@ -42,7 +50,7 @@ const GenerateQR = ({navigation}) => {
         </View>
       </View>
       <Ztechub />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -73,6 +81,7 @@ const styles = StyleSheet.create({
     fontSize: wp(4),
     color: 'black',
     textAlignVertical: 'top',
+    lineHeight: hp(2.8),
   },
 
   clear_container: {

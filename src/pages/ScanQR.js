@@ -35,7 +35,7 @@ const ScanQR = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TopNav navigation={navigation} shareData={shareData} />
 
       <Text style={styles.QRData}>QR Data: </Text>
@@ -66,7 +66,7 @@ const ScanQR = ({navigation}) => {
       </View>
 
       <Ztechub />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(6),
     marginVertical: hp(1.5),
     color: 'black',
+    lineHeight: hp(2.8),
   },
 
   QR_Container: {

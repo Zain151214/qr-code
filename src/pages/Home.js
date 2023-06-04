@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   logo_container: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: hp(14),
+    marginTop: hp(8),
+    marginBottom: hp(7),
   },
 
   logo: {
