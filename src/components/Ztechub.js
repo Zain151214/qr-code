@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     fontSize: wp(5),
     fontWeight: 'bold',
     color: 'black',
-    marginBottom: hp(4),
+    paddingVertical: hp(4),
+    backgroundColor: '#F3F6F6',
   },
 });

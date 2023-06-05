@@ -61,7 +61,6 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
           <TouchableOpacity
             onPress={() => {
               copyToClipboard(shareData);
-              setShowModal(true);
               setShowTick(true);
               setTimeout(() => {
                 setShowTick(false);
@@ -99,7 +98,7 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
           ''
         )}
       </View>
-      {/* <ShowModal
+      <ShowModal
         showModal={showModal}
         setShowModal={setShowModal}
         title={
@@ -107,7 +106,7 @@ const TopNav = ({navigation, shareData, svgRef, text}) => {
             ? 'Copied To Clipboard.'
             : 'QR Code will be downloaded shortly.'
         }
-      /> */}
+      />
     </View>
   );
 };

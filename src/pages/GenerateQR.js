@@ -20,37 +20,43 @@ const GenerateQR = ({navigation}) => {
   const svgRef = useRef(null);
 
   return (
-    <ScrollView style={styles.container}>
-      <TopNav navigation={navigation} svgRef={svgRef} text={text} />
+    <>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{flexGrow: 1}}>
+        <TopNav navigation={navigation} svgRef={svgRef} text={text} />
 
-      <View style={styles.content_container}>
-        <Text style={styles.mainHeading}>Generate QR For:</Text>
-        <TextInput
-          placeholder="Enter Details"
-          value={text}
-          onChangeText={data => {
-            const correctDate = data.replace(/ +$/gm, ' ').replace(/^ +/gm, '');
-            setText(correctDate);
-          }}
-          style={styles.input}
-          multiline={true}
-          numberOfLines={4}
-        />
+        <View style={styles.content_container}>
+          <Text style={styles.mainHeading}>Generate QR For:</Text>
+          <TextInput
+            placeholder="Enter Details"
+            value={text}
+            onChangeText={data => {
+              const correctDate = data
+                .replace(/ +$/gm, ' ')
+                .replace(/^ +/gm, '');
+              setText(correctDate);
+            }}
+            style={styles.input}
+            multiline={true}
+            numberOfLines={4}
+          />
 
-        <View style={styles.clear_container}>
-          <Pressable onPress={() => setText('')}>
-            <Text style={styles.clear_button}>Clear</Text>
-          </Pressable>
+          <View style={styles.clear_container}>
+            <Pressable onPress={() => setText('')}>
+              <Text style={styles.clear_button}>Clear</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.QR_container}>
+            {text && (
+              <QRCode quietZone={25} value={text} getRef={svgRef} size={250} />
+            )}
+          </View>
         </View>
-
-        <View style={styles.QR_container}>
-          {text && (
-            <QRCode quietZone={25} value={text} getRef={svgRef} size={250} />
-          )}
-        </View>
-      </View>
-      <Ztechub />
-    </ScrollView>
+        <Ztechub />
+      </ScrollView>
+    </>
   );
 };
 
@@ -82,6 +88,7 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlignVertical: 'top',
     lineHeight: hp(2.8),
+    maxHeight: 100,
   },
 
   clear_container: {

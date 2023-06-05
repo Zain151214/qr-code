@@ -19,7 +19,7 @@ import {
 const ScanQR = ({navigation}) => {
   const [qrData, setQrData] = useState('The QR data will be shown here:');
   const [reload, setReload] = useState(false);
-  const [shareData, setShareData] = useState('');
+  const [shareData, setShareData] = useState('a');
 
   const onScan = e => {
     setQrData(e.data);
@@ -35,38 +35,41 @@ const ScanQR = ({navigation}) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <TopNav navigation={navigation} shareData={shareData} />
+    <>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{flexGrow: 1}}>
+        <TopNav navigation={navigation} shareData={shareData} />
 
-      <Text style={styles.QRData}>QR Data: </Text>
-      <ScrollView style={styles.data_container}>
-        <Text style={styles.Data}>{qrData}</Text>
+        <Text style={styles.QRData}>QR Data: </Text>
+        <ScrollView style={styles.data_container}>
+          <Text style={styles.Data}>{qrData}</Text>
+        </ScrollView>
+
+        <View style={styles.QR_Container}>
+          {reload ? (
+            <>
+              <TouchableOpacity onPress={handleReload}>
+                <Image
+                  style={styles.reload_icon}
+                  source={require('../icons/reload.png')}
+                />
+              </TouchableOpacity>
+            </>
+          ) : (
+            <QRCodeScanner
+              onRead={onScan}
+              cameraStyle={[styles.camera]}
+              containerStyle={[styles.cameraContainer]}
+              showMarker={true}
+              markerStyle={styles.marker}
+              reactivate={reload ? false : true}
+            />
+          )}
+        </View>
       </ScrollView>
-
-      <View style={styles.QR_Container}>
-        {reload ? (
-          <>
-            <TouchableOpacity onPress={handleReload}>
-              <Image
-                style={styles.reload_icon}
-                source={require('../icons/reload.png')}
-              />
-            </TouchableOpacity>
-          </>
-        ) : (
-          <QRCodeScanner
-            onRead={onScan}
-            cameraStyle={[styles.camera]}
-            containerStyle={[styles.cameraContainer]}
-            showMarker={true}
-            markerStyle={styles.marker}
-            reactivate={reload ? false : true}
-          />
-        )}
-      </View>
-
       <Ztechub />
-    </ScrollView>
+    </>
   );
 };
 
