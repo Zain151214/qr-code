@@ -19,7 +19,7 @@ import {
 const ScanQR = ({navigation}) => {
   const [qrData, setQrData] = useState('The QR data will be shown here:');
   const [reload, setReload] = useState(false);
-  const [shareData, setShareData] = useState('a');
+  const [shareData, setShareData] = useState('');
 
   const onScan = e => {
     setQrData(e.data);

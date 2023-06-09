@@ -40,6 +40,7 @@ const GenerateQR = ({navigation}) => {
             style={styles.input}
             multiline={true}
             numberOfLines={4}
+            maxLength={400}
           />
 
           <View style={styles.clear_container}>
